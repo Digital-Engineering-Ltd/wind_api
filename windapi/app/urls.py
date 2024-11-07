@@ -13,6 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+# Create a simple view function for the homepage
+def home(request):
+    return HttpResponse("Welcome to the homepage!")
+
 from drf_spectacular.views import (  # type: ignore
     SpectacularAPIView,
     SpectacularSwaggerView,
@@ -20,15 +25,18 @@ from drf_spectacular.views import (  # type: ignore
 from django.contrib import admin
 from django.urls import path, include
 
+# In app/urls.py
+from django.urls import path, include
+from django.http import HttpResponse
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
-    path(
-        'api/docs/',
-        SpectacularSwaggerView.as_view(url_name='api-schema'),
-        name='api-docs',
-    ),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
     path('api/user/', include('user.urls')),
     path('api/wind_assessments/', include('wind_assessments.urls')),
 
+    # Add the root path to display a homepage or redirect
+    path('', home, name='home'),  # This makes `/` accessible
 ]
