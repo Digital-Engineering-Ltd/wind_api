@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -92,6 +93,12 @@ DATABASES = {
     }
 }
 
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default']['TEST'] = {
+        'NAME': 'test_devdb',
+        'KEEPDB': True,  # Ensure Django doesn’t try to delete the test database
+    }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -132,11 +139,14 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")  # The directory where static files will be collected
+#STATIC_ROOT = '/windapi/staticfiles'  # This matches the volume mount for the static files
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),  # Point to the 'static' directory where your static files are located
 ]
+
+
 
 
 # Default primary key field type

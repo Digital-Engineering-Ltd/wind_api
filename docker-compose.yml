@@ -10,12 +10,13 @@ services:
       - "8000:8000"
     volumes:
       - ./windapi:/windapi  # Ensure this matches the actual path where manage.py is located
-      - ./windapi/staticfiles:/static  # Correct the path if needed
+      - ./windapi/staticfiles:/windapi/staticfiles # Correct the path if needed
 
     command: >
       sh -c "python manage.py wait_for_db &&
              python manage.py migrate &&
              python manage.py collectstatic --noinput &&
+             python manage.py test --keepdb --noinput &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db
@@ -34,6 +35,8 @@ services:
     image: postgis/postgis:16-3.4
     volumes:
       - dev-db-data:/var/lib/postgresql/data
+      - test-db-data:/var/lib/postgresql/test_data  # Optional for test database persistence
+
     environment:
       - POSTGRES_DB=devdb
       - POSTGRES_USER=postgres
@@ -55,7 +58,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./windapi/staticfiles:/static  # Map the collected static files
+      - ./windapi/staticfiles:/usr/share/nginx/html/static  # Nginx default location for static files
     depends_on:
       - windapi
     networks:
@@ -64,6 +67,7 @@ services:
 volumes:
   dev-db-data:
   static-data:
+  test-db-data:
 
 networks:
   backend:

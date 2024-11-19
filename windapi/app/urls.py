@@ -28,6 +28,8 @@ from django.urls import path, include
 # In app/urls.py
 from django.urls import path, include
 from django.http import HttpResponse
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
