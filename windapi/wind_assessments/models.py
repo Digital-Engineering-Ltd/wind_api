@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.gis.db import models
 from django.utils import timezone
+from django.contrib.gis.db import models as gis_models
+from django.contrib.gis.geos import Point
 
 # Create your models here.
 
@@ -40,15 +42,16 @@ class WindAssessment(models.Model):
     customer_name = models.CharField(max_length=255)
     site_name = models.CharField(max_length=255)
     report_type = models.CharField(max_length=20, choices=REPORT_TYPE_CHOICES)
-    lat = models.DecimalField(max_digits=8, decimal_places=5, default=0.0)
-    lon = models.DecimalField(
-        max_digits=8,
-        decimal_places=5,
-        default=0.0)
-    location = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True)
+    # lat = models.DecimalField(max_digits=8, decimal_places=5, default=0.0)
+    # lon = models.DecimalField(
+    #     max_digits=8,
+    #     decimal_places=5,
+    #     default=0.0)
+    # location = models.CharField(
+    #     max_length=255,
+    #     null=True,
+    #     blank=True)
+    position = gis_models.PointField(null=True, blank=True, db_index=True)
     turbine_type = models.CharField(
         max_length=20,
         choices=TURBINE_CHOICES)  # This is correct

@@ -5,6 +5,8 @@ from django.test import TestCase
 from wind_assessments.models import WindAssessment
 from django.contrib.auth import get_user_model
 from decimal import Decimal
+from django.contrib.gis.geos import Point
+
 # Create your tests here.
 
 
@@ -24,9 +26,10 @@ class WindAssessmentModelTests(TestCase):
             customer_name='Test Customer',
             site_name='Test Site',
             report_type='feasibility',
-            lat=Decimal('35.12345'),
-            lon=Decimal('-120.12345'),
-            location='Test Location',
+            # lat=Decimal('35.12345'),
+            # lon=Decimal('-120.12345'),
+            # location='Test Location',
+            position=Point(12.4924, 41.8902),
             turbine_type='turbine_model_a',
             date='2024-09-15',
             assessment_notes='Sample notes.'

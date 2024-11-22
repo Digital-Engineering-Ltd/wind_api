@@ -3,6 +3,320 @@ info:
   title: ''
   version: 0.0.0
 paths:
+  /api/mapping/data/:
+    get:
+      operationId: mapping_data_list
+      description: ViewSet for managing MapData.
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapDataList'
+          description: ''
+    post:
+      operationId: mapping_data_create
+      description: ViewSet for managing MapData.
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapData'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MapData'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MapData'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapData'
+          description: ''
+  /api/mapping/data/{id}/:
+    get:
+      operationId: mapping_data_retrieve
+      description: ViewSet for managing MapData.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data.
+        required: true
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapData'
+          description: ''
+    put:
+      operationId: mapping_data_update
+      description: ViewSet for managing MapData.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data.
+        required: true
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapData'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MapData'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MapData'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapData'
+          description: ''
+    patch:
+      operationId: mapping_data_partial_update
+      description: ViewSet for managing MapData.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data.
+        required: true
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMapData'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMapData'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMapData'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapData'
+          description: ''
+    delete:
+      operationId: mapping_data_destroy
+      description: ViewSet for managing MapData.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data.
+        required: true
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/mapping/sources/:
+    get:
+      operationId: mapping_sources_list
+      description: ViewSet for managing MapDataSources.
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MapDataSources'
+          description: ''
+    post:
+      operationId: mapping_sources_create
+      description: ViewSet for managing MapDataSources.
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapDataSources'
+          description: ''
+  /api/mapping/sources/{id}/:
+    get:
+      operationId: mapping_sources_retrieve
+      description: ViewSet for managing MapDataSources.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data sources.
+        required: true
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapDataSources'
+          description: ''
+    put:
+      operationId: mapping_sources_update
+      description: ViewSet for managing MapDataSources.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data sources.
+        required: true
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MapDataSources'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapDataSources'
+          description: ''
+    patch:
+      operationId: mapping_sources_partial_update
+      description: ViewSet for managing MapDataSources.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data sources.
+        required: true
+      tags:
+      - mapping
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMapDataSources'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMapDataSources'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMapDataSources'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapDataSources'
+          description: ''
+    delete:
+      operationId: mapping_sources_destroy
+      description: ViewSet for managing MapDataSources.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this map data sources.
+        required: true
+      tags:
+      - mapping
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
   /api/schema/:
     get:
       operationId: schema_retrieve
@@ -415,6 +729,127 @@ components:
       required:
       - email
       - password
+    GisFeatureCollectionEnum:
+      type: string
+      enum:
+      - FeatureCollection
+    GisFeatureEnum:
+      type: string
+      enum:
+      - Feature
+    MapData:
+      type: object
+      description: Serializer for MapData model.
+      properties:
+        type:
+          $ref: '#/components/schemas/GisFeatureEnum'
+        id:
+          type: integer
+          readOnly: true
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+              - 12.9721
+              - 77.5933
+              minItems: 2
+              maxItems: 3
+        properties:
+          type: object
+          properties:
+            source:
+              $ref: '#/components/schemas/MapDataSources'
+            value:
+              type: number
+              format: double
+            date_added:
+              type: string
+              format: date
+              readOnly: true
+    MapDataList:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GisFeatureCollectionEnum'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/MapData'
+    MapDataSources:
+      type: object
+      description: Serializer for MapDataSources model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        value_description:
+          type: string
+      required:
+      - id
+      - name
+      - value_description
+    PatchedMapData:
+      type: object
+      description: Serializer for MapData model.
+      properties:
+        type:
+          $ref: '#/components/schemas/GisFeatureEnum'
+        id:
+          type: integer
+          readOnly: true
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+              - 12.9721
+              - 77.5933
+              minItems: 2
+              maxItems: 3
+        properties:
+          type: object
+          properties:
+            source:
+              $ref: '#/components/schemas/MapDataSources'
+            value:
+              type: number
+              format: double
+            date_added:
+              type: string
+              format: date
+              readOnly: true
+    PatchedMapDataSources:
+      type: object
+      description: Serializer for MapDataSources model.
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        value_description:
+          type: string
     PatchedUser:
       type: object
       description: Serializer for the user object.
@@ -446,18 +881,24 @@ components:
           maxLength: 255
         report_type:
           $ref: '#/components/schemas/ReportTypeEnum'
-        lat:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,5})?$
-        lon:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,5})?$
-        location:
-          type: string
+        position:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+              - 12.9721
+              - 77.5933
+              minItems: 2
+              maxItems: 3
           nullable: true
-          maxLength: 255
         turbine_type:
           $ref: '#/components/schemas/TurbineTypeEnum'
         assessment_notes:
@@ -524,18 +965,24 @@ components:
           maxLength: 255
         report_type:
           $ref: '#/components/schemas/ReportTypeEnum'
-        lat:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,5})?$
-        lon:
-          type: string
-          format: decimal
-          pattern: ^-?\d{0,3}(?:\.\d{0,5})?$
-        location:
-          type: string
+        position:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              items:
+                type: number
+                format: float
+              example:
+              - 12.9721
+              - 77.5933
+              minItems: 2
+              maxItems: 3
           nullable: true
-          maxLength: 255
         turbine_type:
           $ref: '#/components/schemas/TurbineTypeEnum'
         assessment_notes:

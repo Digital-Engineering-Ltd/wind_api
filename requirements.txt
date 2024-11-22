@@ -67,3 +67,4 @@ django_redis
 django-cacheops
 scipy
 django-storages
+django-leaflet

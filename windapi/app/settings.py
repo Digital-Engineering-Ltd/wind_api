@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'leaflet',
     'core',
     'rest_framework',
     'rest_framework.authtoken',
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'user',
     'wind_assessments',
+    'mapping',
 ]
 
 MIDDLEWARE = [
@@ -137,14 +139,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "/static/"
+# Static files (CSS, JavaScript, images)
+STATIC_URL = '/static/'
 
-#STATIC_ROOT = '/windapi/staticfiles'  # This matches the volume mount for the static files
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Directory where static files will be collected
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# Static files dirs if you have additional directories to include
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  # Point to the 'static' directory where your static files are located
+    os.path.join(BASE_DIR, 'static'),  # Adjust this based on your project's structure
 ]
+
 
 
 

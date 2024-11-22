@@ -29,7 +29,7 @@ from django.urls import path, include
 from django.urls import path, include
 from django.http import HttpResponse
 from django.conf.urls.static import static
-
+from django.conf import settings
 
 
 urlpatterns = [
@@ -38,7 +38,11 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
     path('api/user/', include('user.urls')),
     path('api/wind_assessments/', include('wind_assessments.urls')),
+    path('api/mapping/', include('mapping.urls')),
 
     # Add the root path to display a homepage or redirect
     path('', home, name='home'),  # This makes `/` accessible
-]
+
+
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
