@@ -3,7 +3,7 @@ URL mappings for the Wind Assessment API.
 """
 from django.urls import path
 from wind_assessments import views
-# from wind_assessments.models import WindAssessment
+from mapping.views import ExportMapDataView  # Update the import
 
 app_name = 'wind_assessments'
 
@@ -20,4 +20,5 @@ urlpatterns = [
         'wind_assessment/<int:pk>/',
         views.RetrieveUpdateWindAssessmentView.as_view(),
         name='detail-wind-assessment'),
+    path('export_map_data/', ExportMapDataView.as_view(), name='export-map-data'),  # Update the view
 ]

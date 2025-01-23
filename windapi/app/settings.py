@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-^=lg(!#_)y@%t!#49hevauw50de7%8t$-y6f%%@kx2k%f5*$4m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', 'testserver']
 
 
 # Application definition
@@ -135,6 +135,8 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Data upload settings
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000  # Adjust this value to your needs
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -161,6 +163,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+# }
+
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+    # Permissions: Temporarily allow all requests for debugging
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    # Authentication (optional: depending on your needs)
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
 }

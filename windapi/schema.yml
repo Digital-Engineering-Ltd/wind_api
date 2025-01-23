@@ -18,7 +18,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MapDataList'
+                type: array
+                items:
+                  $ref: '#/components/schemas/MapData'
           description: ''
     post:
       operationId: mapping_data_create
@@ -36,6 +38,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/MapData'
+        required: true
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -94,6 +97,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/MapData'
+        required: true
       security:
       - cookieAuth: []
       - basicAuth: []
@@ -586,6 +590,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/AuthToken'
           description: ''
+  /api/wind_assessments/export_map_data/:
+    get:
+      operationId: wind_assessments_export_map_data_retrieve
+      description: Export filtered map data as CSV.
+      tags:
+      - wind_assessments
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MapData'
+          description: ''
   /api/wind_assessments/wind_assessment/:
     get:
       operationId: wind_assessments_wind_assessment_list
@@ -729,61 +750,44 @@ components:
       required:
       - email
       - password
-    GisFeatureCollectionEnum:
-      type: string
-      enum:
-      - FeatureCollection
-    GisFeatureEnum:
-      type: string
-      enum:
-      - Feature
     MapData:
       type: object
       description: Serializer for MapData model.
       properties:
-        type:
-          $ref: '#/components/schemas/GisFeatureEnum'
         id:
           type: integer
           readOnly: true
-        geometry:
+        position:
           type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - Point
-            coordinates:
-              type: array
-              items:
-                type: number
-                format: float
-              example:
-              - 12.9721
-              - 77.5933
-              minItems: 2
-              maxItems: 3
-        properties:
-          type: object
-          properties:
-            source:
-              $ref: '#/components/schemas/MapDataSources'
-            value:
-              type: number
-              format: double
-            date_added:
-              type: string
-              format: date
-              readOnly: true
-    MapDataList:
-      type: object
-      properties:
+          additionalProperties: {}
+          readOnly: true
+        source:
+          type: integer
+        value:
+          type: number
+          format: double
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+        x_osgb36:
+          type: number
+          format: double
+          nullable: true
+        y_osgb36:
+          type: number
+          format: double
+          nullable: true
         type:
-          $ref: '#/components/schemas/GisFeatureCollectionEnum'
-        features:
-          type: array
-          items:
-            $ref: '#/components/schemas/MapData'
+          type: string
+          nullable: true
+          maxLength: 50
+      required:
+      - date_added
+      - id
+      - position
+      - source
+      - value
     MapDataSources:
       type: object
       description: Serializer for MapDataSources model.
@@ -804,40 +808,34 @@ components:
       type: object
       description: Serializer for MapData model.
       properties:
-        type:
-          $ref: '#/components/schemas/GisFeatureEnum'
         id:
           type: integer
           readOnly: true
-        geometry:
+        position:
           type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - Point
-            coordinates:
-              type: array
-              items:
-                type: number
-                format: float
-              example:
-              - 12.9721
-              - 77.5933
-              minItems: 2
-              maxItems: 3
-        properties:
-          type: object
-          properties:
-            source:
-              $ref: '#/components/schemas/MapDataSources'
-            value:
-              type: number
-              format: double
-            date_added:
-              type: string
-              format: date
-              readOnly: true
+          additionalProperties: {}
+          readOnly: true
+        source:
+          type: integer
+        value:
+          type: number
+          format: double
+        date_added:
+          type: string
+          format: date
+          readOnly: true
+        x_osgb36:
+          type: number
+          format: double
+          nullable: true
+        y_osgb36:
+          type: number
+          format: double
+          nullable: true
+        type:
+          type: string
+          nullable: true
+          maxLength: 50
     PatchedMapDataSources:
       type: object
       description: Serializer for MapDataSources model.

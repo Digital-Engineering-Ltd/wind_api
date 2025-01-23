@@ -40,6 +40,7 @@ urlpatterns = [
     path('api/wind_assessments/', include('wind_assessments.urls')),
     path('api/mapping/', include('mapping.urls')),
 
+
     # Add the root path to display a homepage or redirect
     path('', home, name='home'),  # This makes `/` accessible
 
